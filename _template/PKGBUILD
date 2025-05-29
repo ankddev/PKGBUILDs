@@ -1,0 +1,38 @@
+# Maintainer: ANKDDEV <dev.ankddev@outlook.com>
+# https://github.com/ankddev/PKGBUILDs
+
+_pkgname=
+pkgname=
+pkgver=
+pkgrel=1
+pkgdesc=''
+arch=('x86_64')
+url=""
+license=('')
+groups=('')
+source=("")
+sha256sums=('')
+makedepends=('')
+depends=('')
+optdepends=('')
+provides=('')
+conflicts=('')
+install=("")
+options=('')
+
+prepare() {
+
+}
+
+build() {
+
+}
+
+check() {
+
+}
+
+package() {
+
+}
+
