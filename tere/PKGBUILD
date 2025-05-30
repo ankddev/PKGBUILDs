@@ -1,0 +1,37 @@
+# Maintainer: ANKDDEV <dev.ankddev@outlook.com>
+# https://github.com/ankddev/PKGBUILDs
+
+pkgname=tere
+pkgver=1.6.0
+pkgrel=1
+pkgdesc='Terminal file explorer'
+arch=('x86_64' 'aarch64')
+url="https://github.com/mgunyho/tere"
+license=('European Union Public License 1.2')
+source=("$pkgname-$pkgver.tar.gz::$url/archive/v$pkgver.tar.gz")
+sha256sums=('7db94216b94abd42f48105c90e0e777593aaf867472615eb94dc2f77bb6a3cfb')
+makedepends=('cargo')
+
+prepare() {
+    cd $pkgname-$pkgver
+    cargo fetch --locked --target "$(rustc -vV | sed -n 's/host: //p')"
+}
+
+build() {
+    export CARGO_TARGET_DIR=target
+    cd "$pkgname-$pkgver"
+    cargo build --frozen --release
+}
+
+check() {
+    cd "$pkgname-$pkgver"
+    cargo test --frozen --release
+}
+
+package() {
+    cd "$pkgname-$pkgver"
+    install -Dm0755 "target/release/$pkgname" -t "$pkgdir/usr/bin"
+    install -Dm644 README.md -t "$pkgdir/usr/share/doc/$pkgname"
+    install -Dm644 LICENSE -t "$pkgdir/usr/share/licenses/$pkgname"
+}
+
